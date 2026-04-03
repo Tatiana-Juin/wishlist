@@ -6,22 +6,40 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
   const [name,setName] = useState<string>("")
   const [price,setPrice] = useState<number>(0)
   const [url,setUrl] = useState<string>("")
+  const [errors,setErrors] = useState<boolean>(true)
+
+  const validateForm = (name:string,price:number,url:string)=>{
+    if(name.trim()=="" || url.trim()=="" || price <=0){
+      setErrors(false);
+      return false;
+    }
+    else{
+      setErrors(true);
+      return true;
+    }
+  }
 
   const handleAddProduct=(e: React.FormEvent) =>{
     e.preventDefault()
-    // creation de mon objet par rapport a mon interface Products
-    const newProduct: Products={
+    // validateForm(name,price,url)
+    if(validateForm(name,price,url)){
+       const newProduct: Products={
       id:Date.now(),
       name:name,
       price:price,
       url:url,
       category:'Autre'
     }
-    onAddProduct(newProduct)
-    setName("")
-    setPrice(0)
-    setUrl("")
+      onAddProduct(newProduct)
+      setName("")
+      setPrice(0)
+      setUrl("")
+    }
+    
   }
+  
+
+  
   return (
     <>
       <div className="flex flex-col">
