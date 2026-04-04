@@ -35,7 +35,7 @@ function App({...props}) {
       {/* Affiche la modal que si c'est true  */}
       {isVisibleAdding &&(
         <Modal onClose={()=> setIsVisibleAdding(false)} 
-        onAddProduct={addProduct} 
+        onAddProduct={addProduct} products={wishlist}
         />
       )}
       

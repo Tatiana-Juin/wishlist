@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Products } from '../types/products';
 
-export default function AddProduct({onAddProduct}:{onAddProduct : (product:Products)=>void}) {
+export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (product:Products)=>void, products:Products[]}) {
   
   const [name,setName] = useState<string>("")
   const [price,setPrice] = useState<number>(0)
@@ -11,19 +11,26 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
   // function for verificate the error what the user add product 
   const validateForm = (name:string,price:number,url:string)=>{
     setMessageForm("")
+    
     const urlRegex = /^https:\/\/.*\..*/;
     if(name.trim()=="" || url.trim()=="" || price <=0  ){
        setMessageForm("Tout les champs sont vide ")
       setErrors(false);
       return false;
     }
-    
+    const isDuplicate = products.some(p => p.name.toLowerCase() === name.trim().toLowerCase());
+    if (isDuplicate) {
+      setErrors(false);
+      setMessageForm("Ce nom de produit existe déjà ! 🛑");
+      return false;
+    }
+
     if(!urlRegex.test(url)){
       setErrors(false);
       setMessageForm("L'URL doit commencer par https:// et contenir un point.");
       return false;
     }
-    setMessageForm("Le produti à était ajouter ")
+    setMessageForm("Le produit à était ajouter ")
     setErrors(true);
     return true;
   
@@ -31,8 +38,9 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
 
   const handleAddProduct=(e: React.FormEvent) =>{
     e.preventDefault()
-    // validateForm(name,price,url)
-   
+    
+    
+
     if(validateForm(name,price,url)){
        const newProduct: Products={
       id:Date.now(),
@@ -65,7 +73,7 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
                 placeholder="Nom de l'objet " 
                 className="border"
                 value={name}
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e)=>setName(e.target.value.toLowerCase().trim())}
                />
 
               <label className="mt-5">Prix</label>
