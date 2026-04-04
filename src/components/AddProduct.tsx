@@ -10,20 +10,29 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
   const [messageForm,setMessageForm] = useState<string>("")
   // function for verificate the error what the user add product 
   const validateForm = (name:string,price:number,url:string)=>{
-    if(name.trim()=="" || url.trim()=="" || price <=0){
+    setMessageForm("")
+    const urlRegex = /^https:\/\/.*\..*/;
+    if(name.trim()=="" || url.trim()=="" || price <=0  ){
+       setMessageForm("Tout les champs sont vide ")
       setErrors(false);
       return false;
     }
-    else{
-      setErrors(true);
-      return true;
+    
+    if(!urlRegex.test(url)){
+      setErrors(false);
+      setMessageForm("L'URL doit commencer par https:// et contenir un point.");
+      return false;
     }
+    setMessageForm("Le produti à était ajouter ")
+    setErrors(true);
+    return true;
+  
   }
 
   const handleAddProduct=(e: React.FormEvent) =>{
     e.preventDefault()
     // validateForm(name,price,url)
-    setMessageForm("")
+   
     if(validateForm(name,price,url)){
        const newProduct: Products={
       id:Date.now(),
@@ -36,9 +45,7 @@ export default function AddProduct({onAddProduct}:{onAddProduct : (product:Produ
       setName("")
       setPrice(0)
       setUrl("")
-      setMessageForm("Ton produit à était ajouter")
-    }else{
-      setMessageForm("Il a un probleme. Tu doit saisir tout les champs")
+     
     }
     
   }
