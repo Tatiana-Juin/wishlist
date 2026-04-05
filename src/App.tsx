@@ -16,6 +16,7 @@ function App({...props}) {
   // Pour faire passer les information il faut une fonction addProduct 
   const addProduct=(newProduct:Products) =>{
     setWishlist([...wishlist,newProduct])
+    setIsVisibleAdding(false);
   }
 
   return (
