@@ -48,7 +48,7 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
       name:name,
       price:price,
       url:url,
-      category:'Autre'
+      
     }
       onAddProduct(newProduct)
       setName("")

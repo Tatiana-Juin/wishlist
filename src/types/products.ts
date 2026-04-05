@@ -3,5 +3,5 @@ export interface Products{
     name: string;
     price: number;
     url: string;
-    category: 'Tech' | 'productivite'  | 'Autre';
+    
 }
