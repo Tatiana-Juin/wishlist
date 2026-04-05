@@ -5,7 +5,7 @@ export default function Modal({ onClose,onAddProduct,products }: { onClose: () =
     <>
     <div className="fixed inset-0 z-50 flex item-center justify-center bg-black/60 p-4">
 
-      {/* la oite modal */}
+      {/* la boite modal */}
       <div className="bg-white w-full sm:max-w-md rounded-lg shadow-2xl overflow-hidden relative max-h-[75vh]" >
 
         {/* En tete de la modal  */}

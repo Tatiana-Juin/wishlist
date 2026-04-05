@@ -7,7 +7,7 @@ import WishlistGrid from './components/WishlistGrid';
 
 
 
-function App({...props}) {
+function App() {
   // 1. On crée une liste pour mon interface
   const [wishlist, setWishlist] = useState<Products[]>([]);
 
