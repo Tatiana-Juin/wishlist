@@ -30,7 +30,7 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
       setMessageForm("L'URL doit commencer par https:// et contenir un point.");
       return false;
     }
-    setMessageForm("Le produit à était ajouter ")
+    
     setErrors(true);
     return true;
   
