@@ -6,8 +6,9 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
   const [name,setName] = useState<string>("")
   const [price,setPrice] = useState<number>(0)
   const [url,setUrl] = useState<string>("")
-  const [errors,setErrors] = useState<boolean>(true)
+  const [noErrors,setNoErrors] = useState<boolean>(true)
   const [messageForm,setMessageForm] = useState<string>("")
+
   // function for verificate the error what the user add product 
   const validateForm = (name:string,price:number,url:string)=>{
     setMessageForm("")
@@ -15,23 +16,23 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
     const urlRegex = /^https:\/\/.*\..*/;
     if(name.trim()=="" || url.trim()=="" || price <=0  ){
        setMessageForm("Tout les champs sont vide ")
-      setErrors(false);
+      setNoErrors(false);
       return false;
     }
     const isDuplicate = products.some(p => p.name.toLowerCase() === name.trim().toLowerCase());
     if (isDuplicate) {
-      setErrors(false);
+      setNoErrors(false);
       setMessageForm("Ce nom de produit existe déjà ! 🛑");
       return false;
     }
 
     if(!urlRegex.test(url)){
-      setErrors(false);
+      setNoErrors(false);
       setMessageForm("L'URL doit commencer par https:// et contenir un point.");
       return false;
     }
     
-    setErrors(true);
+    setNoErrors(true);
     return true;
   
   }
@@ -102,7 +103,7 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
           </form>
           {/* MESSAGE QUI APPARAIT APRES ALA VALIDATION DU FORMULAIRE  */}
           {messageForm &&(
-            <p className={errors ? "text-green-500" : "text-red-500"} > {messageForm} </p>
+            <p className={noErrors ? "text-green-500" : "text-red-500"} > {messageForm} </p>
           )}
         </div>
       </div>
