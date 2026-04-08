@@ -36,12 +36,10 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
     return true;
   
   }
-
+  // function for add a product 
   const handleAddProduct=(e: React.FormEvent) =>{
     e.preventDefault()
     
-    
-
     if(validateForm(name,price,url)){
        const newProduct: Products={
       id:Date.now(),
@@ -66,6 +64,7 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
       <div className="flex flex-col">
         
         <div>
+          {/* Input for add a product */}
           <form action="" className="flex flex-col mx-5" onSubmit={handleAddProduct}>
               <label >Nom</label>
               <input type="text"
@@ -101,7 +100,7 @@ export default function AddProduct({onAddProduct, products=[]}:{onAddProduct : (
               <input type="submit" value="Ajouter"  className="border mt-5 rounded border-pink-200 bg-pink-100 p-2 cursor-pointer " />
 
           </form>
-          {/* MESSAGE QUI APPARAIT APRES ALA VALIDATION DU FORMULAIRE  */}
+          {/*  message when a product is add or when there are an error  */}
           {messageForm &&(
             <p className={noErrors ? "text-green-500" : "text-red-500"} > {messageForm} </p>
           )}

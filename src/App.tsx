@@ -13,7 +13,7 @@ function App() {
 
   const [isVisibleAdding,setIsVisibleAdding] = useState<boolean>(false)
 
-  // Pour faire passer les information il faut une fonction addProduct 
+  // for do come the information he do a function addProduct
   const addProduct=(newProduct:Products) =>{
     setWishlist([...wishlist,newProduct])
     setIsVisibleAdding(false);
@@ -23,7 +23,7 @@ function App() {
     <>
     <Header />
     <div className='p-6'>
-        {/* Affiche le bouton + que si c'est false */}
+        {/* show the button + that if it is false*/}
       {!isVisibleAdding&& (
         <>
          <button className='rounded mt-5 p-2 w-24 border border-pink-200 bg-pink-100 cursor-pointer' onClick={()=> setIsVisibleAdding(true)}> +</button>
@@ -31,16 +31,13 @@ function App() {
          </>    
       )}
     </div>
-      
-      
-      {/* Affiche la modal que si c'est true  */}
+    
+      {/* show the modal that if it is true   */}
       {isVisibleAdding &&(
         <Modal onClose={()=> setIsVisibleAdding(false)} 
         onAddProduct={addProduct} products={wishlist}
         />
       )}
-      
-      
       
     </>
   );
