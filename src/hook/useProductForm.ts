@@ -54,7 +54,34 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
   
   }
     // creer la fonction handleSubmit 
+    const handleSubmit = (e: React.FormEvent) =>{
+        e.preventDefault()
+
+        if(validateForm(name,price,url)){
+            const productData : Products={
+                id : initialProduct?.id || Date.now(),
+                name:name,
+                price:price,
+                url:url
+
+            };
+            onSubmit(productData)
+            // vide les champs si c'est un ajout 
+            if(!initialProduct){
+                setName("")
+                setPrice(0)
+                setUrl("")
+            }
+        }
+    }
 
     // /Retourne un objet avec tout ce dont le formulaire a besoin 
-    return {}; 
+    return {
+        name, setName,
+        price, setPrice,
+        url, setUrl,
+        messageForm,
+        noErrors,
+        handleSubmit // La fonction qu'on va appeler au moment du clic
+    }; 
 };
