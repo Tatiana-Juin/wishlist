@@ -56,9 +56,10 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
     // fonction handleSSubmit pour l'ajout ou la modification 
     const handleSubmit = (e: React.FormEvent) =>{
         e.preventDefault()
-
+        // si le formulaire est valide 
         if(validateForm(name,price,url)){
             const productData : Products={
+                // soit on récupere un id soit on en créer un 
                 id : initialProduct?.id || Date.now(),
                 name:name,
                 price:price,
@@ -66,7 +67,7 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
 
             };
             onSubmit(productData)
-            // vide les champs si c'est un ajout 
+            // vide les champs si c'est un ajout car initialProductFalse
             if(!initialProduct){
                 setName("")
                 setPrice(0)

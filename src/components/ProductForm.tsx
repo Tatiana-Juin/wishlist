@@ -16,7 +16,7 @@ interface ProductFormProps{
 
 export default function ProductForm({ products, onSubmit, initialProduct,submitLabel }: ProductFormProps) {
   
-  // constante qui recupere tout les champs 
+  // constante qui recupere tout les champs envoyer depuis le hook personnalisé
   const { 
     name, setName, 
     price, setPrice, 
@@ -33,7 +33,7 @@ export default function ProductForm({ products, onSubmit, initialProduct,submitL
       <div className="flex flex-col">
         
         <div>
-          {/* Input for add a product */}
+          {/* bouton pour ajouter un produit */}
           <form action="" className="flex flex-col mx-5" onSubmit={handleSubmit} >
               <label >Nom</label>
               <input type="text"
@@ -69,7 +69,7 @@ export default function ProductForm({ products, onSubmit, initialProduct,submitL
               <input type="submit" value={submitLabel || (initialProduct ? "Modifier" : "Ajouter")}  className="border mt-5 rounded border-pink-200 bg-pink-100 p-2 cursor-pointer " />
 
           </form>
-          {/*  message when a product is add or when there are an error  */}
+          {/*  Message pour les erreur ou ajout  */}
           {messageForm &&(
             <p className={noErrors ? "text-green-500" : "text-red-500"} > {messageForm} </p>
           )}
