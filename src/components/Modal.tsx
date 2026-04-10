@@ -1,6 +1,11 @@
-import AddProduct from "./AddProduct"
+import ProductForm from "./ProductForm"
 import type { Products } from '../types/products';
-export default function Modal({ onClose,onAddProduct,products }: { onClose: () => void,onAddProduct: (product: Products) => void, products:Products[] }) {
+export default function Modal({ onClose, onAddProduct, products, initialProduct }: { 
+  onClose: () => void, 
+  onAddProduct: (product: Products) => void, 
+  products: Products[],
+  initialProduct?: Products
+}) {
   return (
     <>
     <div className="fixed inset-0 z-50 flex item-center justify-center bg-black/60 p-4">
@@ -15,7 +20,12 @@ export default function Modal({ onClose,onAddProduct,products }: { onClose: () =
         </div>
 
         <div className="p-6">
-            <AddProduct onAddProduct={onAddProduct} products={products}/>
+            {/* <AddProduct onAddProduct={onAddProduct} products={products}/> */}
+            <ProductForm 
+              onSubmit={onAddProduct}
+              products={products}
+              initialProduct={initialProduct}
+            />
         </div>
         
 

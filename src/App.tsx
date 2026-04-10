@@ -13,29 +13,51 @@ function App() {
 
   const [isVisibleAdding,setIsVisibleAdding] = useState<boolean>(false)
 
+  const [selectedProduct, setSelectedProduct] = useState<Products | undefined>(undefined);
+
   // for do come the information he do a function addProduct
-  const addProduct=(newProduct:Products) =>{
-    setWishlist([...wishlist,newProduct])
+  // const addProduct=(newProduct:Products) =>{
+  //   setWishlist([...wishlist,newProduct])
+  //   setIsVisibleAdding(false);
+  // }
+
+  const handleSaveProduct = (productData : Products) =>{
+    if(selectedProduct){
+      // modification
+      setWishlist(wishlist.map(p => p.id === productData.id ? productData : p));
+    }else{
+      setWishlist([...wishlist, productData]);
+    }
     setIsVisibleAdding(false);
+    setSelectedProduct(undefined);
   }
+
+  const handleEdit = (product: Products) => {
+    setSelectedProduct(product); // On mémorise le produit à changer
+    setIsVisibleAdding(true);    // On ouvre la modal (le formulaire sera pré-rempli grâce à selectedProduct)
+  };
+  
 
   return (
     <>
     <Header />
     <div className='p-6'>
-        {/* show the button + that if it is false*/}
+        {/* Pour voir le bouton + */}
       {!isVisibleAdding&& (
         <>
-         <button className='rounded mt-5 p-2 w-24 border border-pink-200 bg-pink-100 cursor-pointer' onClick={()=> setIsVisibleAdding(true)}> +</button>
+         <button className='rounded mt-5 p-2 w-24 border border-pink-200 bg-pink-100 cursor-pointer' onClick={()=> {
+          setSelectedProduct(undefined);
+          setIsVisibleAdding(true);
+          }}> +</button>
          <WishlistGrid products={wishlist} /> 
          </>    
       )}
     </div>
     
-      {/* show the modal that if it is true   */}
+      {/* montre la modal que si c'est vrai   */}
       {isVisibleAdding &&(
         <Modal onClose={()=> setIsVisibleAdding(false)} 
-        onAddProduct={addProduct} products={wishlist}
+        onAddProduct={handleSaveProduct} products={wishlist} initialProduct={selectedProduct}
         />
       )}
       
