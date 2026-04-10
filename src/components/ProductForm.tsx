@@ -16,7 +16,7 @@ interface ProductFormProps{
 
 export default function ProductForm({ products, onSubmit, initialProduct,submitLabel }: ProductFormProps) {
   
-  
+  // constante qui recupere tout les champs 
   const { 
     name, setName, 
     price, setPrice, 

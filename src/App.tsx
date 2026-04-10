@@ -34,7 +34,7 @@ function App() {
 
   const handleEdit = (product: Products) => {
     setSelectedProduct(product); // On mémorise le produit à changer
-    setIsVisibleAdding(true);    // On ouvre la modal (le formulaire sera pré-rempli grâce à selectedProduct)
+    setIsVisibleAdding(true);    
   };
   
 
@@ -49,7 +49,7 @@ function App() {
           setSelectedProduct(undefined);
           setIsVisibleAdding(true);
           }}> +</button>
-         <WishlistGrid products={wishlist} /> 
+         <WishlistGrid products={wishlist} onEdit={handleEdit} /> 
          </>    
       )}
     </div>

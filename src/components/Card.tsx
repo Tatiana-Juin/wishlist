@@ -1,5 +1,11 @@
 import type { Products } from "../types/products";
-export default function Card({product}:{product:Products}) {
+export default function Card({ 
+  product, 
+  onEdit 
+}: { 
+  product: Products, 
+  onEdit: (product: Products) => void
+}) {
   return (
     <div className="flex flex-col  border  rounded-lg shadow-md bg-white gap-2 my-6">
       <div className="p-4">
@@ -16,7 +22,9 @@ export default function Card({product}:{product:Products}) {
          
         <div className="mt-2 flex gap-2">
             {/* modification */}    
-          <button className="  bg-pink-100  cursor-pointer mr-6"><i className="bi bi-pencil-fill"></i></button>
+          <button onClick={()=> onEdit(product)} className="  bg-pink-100  cursor-pointer mr-6">
+            <i className="bi bi-pencil-fill"></i>
+          </button>
         {/* Supprimer */}
           <button className="  bg-pink-100 p-2 cursor-pointer"><i className="bi bi-trash"></i></button>
         </div>

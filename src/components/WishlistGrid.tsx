@@ -1,11 +1,16 @@
 import type { Products } from "../types/products";
 import Card from "./Card";
-export default function WishlistGrid({products} : {products:Products[]}) {
+export default function WishlistGrid({ 
+  products, 
+  onEdit 
+}: { 
+  products: Products[], 
+  onEdit: (product: Products) => void 
+}) {
   return (
     <>
-    {/* for show the products add */}
       {products.map((oneProduct)=>{
-        return <Card key={oneProduct.id} product={oneProduct}  />
+        return <Card key={oneProduct.id} product={oneProduct} onEdit={onEdit} />
       })}
     </>
   )

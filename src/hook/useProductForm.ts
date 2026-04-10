@@ -17,7 +17,7 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
     const [noErrors,setNoErrors] = useState<boolean>(true)
     const [messageForm,setMessageForm] = useState<string>("")
 
-    // copir ta fonction validateForm 
+    // Function pour valider le formulaire
     const validateForm = (name:string,price:number,url:string)=>{
     setMessageForm("")
     
@@ -53,7 +53,7 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
     return true;
   
   }
-    // creer la fonction handleSubmit 
+    // fonction handleSSubmit pour l'ajout ou la modification 
     const handleSubmit = (e: React.FormEvent) =>{
         e.preventDefault()
 
@@ -82,6 +82,6 @@ export const useProductForm = ({ products, initialProduct, onSubmit }: UseProduc
         url, setUrl,
         messageForm,
         noErrors,
-        handleSubmit // La fonction qu'on va appeler au moment du clic
+        handleSubmit 
     }; 
 };
