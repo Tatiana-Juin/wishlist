@@ -1,11 +1,11 @@
 import type { Products } from "../types/products";
 export default function Card({ 
   product, 
-  onEdit,handleDelete 
+  onEdit,onConfirmDelete 
 }: { 
   product: Products, 
   onEdit: (product: Products) => void,
-  handleDelete:(id:number) => void
+  onConfirmDelete:(product: Products) => void
 }) {
   return (
     <div className="flex flex-col  border  rounded-lg shadow-md bg-white gap-2 my-6">
@@ -28,7 +28,7 @@ export default function Card({
           </button>
 
         {/* Supprimer */}
-          <button className="  bg-pink-100 p-2 cursor-pointer" onClick={()=>handleDelete(product.id)}><i className="bi bi-trash"></i></button>
+          <button className="  bg-pink-100 p-2 cursor-pointer" onClick={()=> onConfirmDelete(product)} ><i className="bi bi-trash"></i></button>
         </div>
           
       </div>

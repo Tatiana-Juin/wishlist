@@ -3,6 +3,8 @@ import type { Products } from '../types/products';
 export default function Modal({ onClose, onAddProduct, products, initialProduct }: { 
   onClose: () => void, 
   onAddProduct: (product: Products) => void, 
+  onDelete:(id:number) =>void,
+  mode:'save' | 'delete',
   products: Products[],
   initialProduct?: Products
 }) {

@@ -15,6 +15,9 @@ function App() {
 
   const [selectedProduct, setSelectedProduct] = useState<Products | undefined>(undefined);
 
+  // Pour la suppression - pour ouvrir la modal 
+  const [modalMode, setModalMode] = useState<'save' | 'delete'>('save');
+
   // Pour ajouter ou modifier un produit 
   const handleSaveProduct = (productData : Products) =>{
     if(selectedProduct){
@@ -31,6 +34,12 @@ function App() {
     setSelectedProduct(product); // On mémorise le produit à changer
     setIsVisibleAdding(true);    
   };
+
+  const confirmDelete = (product: Products) =>{
+    setSelectedProduct(product);
+    setModalMode('delete');
+    setIsVisibleAdding(true);
+  }
 
   // fonction pour supprimer un produit 
   const handleDelete = (id:number)=>{
@@ -50,7 +59,7 @@ function App() {
           setSelectedProduct(undefined);
           setIsVisibleAdding(true);
           }}> +</button>
-         <WishlistGrid products={wishlist} onEdit={handleEdit} handleDelete={handleDelete}/> 
+         <WishlistGrid products={wishlist} onEdit={handleEdit} onConfirmDelete={confirmDelete}/> 
          </>    
       )}
     </div>
@@ -58,7 +67,7 @@ function App() {
       {/* montre la modal que si c'est vrai   */}
       {isVisibleAdding &&(
         <Modal onClose={()=> setIsVisibleAdding(false)} 
-        onAddProduct={handleSaveProduct} products={wishlist} initialProduct={selectedProduct}
+        onAddProduct={handleSaveProduct} onDelete={handleDelete} mode={modalMode} products={wishlist} initialProduct={selectedProduct}
         />
       )}
       
