@@ -15,12 +15,7 @@ function App() {
 
   const [selectedProduct, setSelectedProduct] = useState<Products | undefined>(undefined);
 
-  // for do come the information he do a function addProduct
-  // const addProduct=(newProduct:Products) =>{
-  //   setWishlist([...wishlist,newProduct])
-  //   setIsVisibleAdding(false);
-  // }
-
+  // Pour ajouter ou modifier un produit 
   const handleSaveProduct = (productData : Products) =>{
     if(selectedProduct){
       // modification
@@ -31,12 +26,18 @@ function App() {
     setIsVisibleAdding(false);
     setSelectedProduct(undefined);
   }
-
+  // pour modifier un produit => la modal 
   const handleEdit = (product: Products) => {
     setSelectedProduct(product); // On mémorise le produit à changer
     setIsVisibleAdding(true);    
   };
-  
+
+  // fonction pour supprimer un produit 
+  const handleDelete = (id:number)=>{
+    const updatedWishlist = wishlist.filter(p=>p.id !== id)
+    // on met a jour la liste 
+    setWishlist(updatedWishlist)
+  }  
 
   return (
     <>
@@ -49,7 +50,7 @@ function App() {
           setSelectedProduct(undefined);
           setIsVisibleAdding(true);
           }}> +</button>
-         <WishlistGrid products={wishlist} onEdit={handleEdit} /> 
+         <WishlistGrid products={wishlist} onEdit={handleEdit} handleDelete={handleDelete}/> 
          </>    
       )}
     </div>
