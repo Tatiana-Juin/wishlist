@@ -32,7 +32,8 @@ function App() {
   // pour modifier un produit => la modal 
   const handleEdit = (product: Products) => {
     setSelectedProduct(product); // On mémorise le produit à changer
-    setIsVisibleAdding(true);    
+    setIsVisibleAdding(true);
+    setModalMode("save")    
   };
 
   const confirmDelete = (product: Products) =>{
@@ -57,6 +58,7 @@ function App() {
         <>
          <button className='rounded mt-5 p-2 w-24 border border-pink-200 bg-pink-100 cursor-pointer' onClick={()=> {
           setSelectedProduct(undefined);
+          setModalMode("save")
           setIsVisibleAdding(true);
           }}> +</button>
          <WishlistGrid products={wishlist} onEdit={handleEdit} onConfirmDelete={confirmDelete}/> 
