@@ -10,9 +10,9 @@ import WishlistGrid from './components/WishlistGrid';
 function App() {
   // 1. On crée une liste pour mon interface
   const [wishlist, setWishlist] = useState<Products[]>([]);
-
+  // visibilité 
   const [isVisibleAdding,setIsVisibleAdding] = useState<boolean>(false)
-
+  // selectionner un produit 
   const [selectedProduct, setSelectedProduct] = useState<Products | undefined>(undefined);
 
   // Pour la suppression - pour ouvrir la modal 
@@ -35,7 +35,7 @@ function App() {
     setIsVisibleAdding(true);
     setModalMode("save")    
   };
-
+  // pour afficher la modal pour la confirmation de la suppression
   const confirmDelete = (product: Products) =>{
     setSelectedProduct(product);
     setModalMode('delete');
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <>
-    <Header />
+    <Header items={wishlist} />
     <div className='p-6'>
         {/* Pour voir le bouton + */}
       {!isVisibleAdding&& (
